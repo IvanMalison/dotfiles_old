@@ -1,3 +1,9 @@
-[submodule "dotfiles/emacs.d"]
-	path = dotfiles/emacs.d
-	url = git@github.com:IvanMalison/.emacs.d.git
+[submodule "lisp/flymake-cursor"]
+	path = lisp/flymake-cursor
+	url = git@github.com:illusori/emacs-flymake-cursor.git
+[submodule "lisp/multi-line-it"]
+	path = lisp/multi-line-it
+	url = git@github.com:IvanMalison/multi-line-it.git
+[submodule "lisp/yasnippet"]
+	path = lisp/yasnippet
+	url = git@github.com:capitaomorte/yasnippet.git
