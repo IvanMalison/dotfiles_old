@@ -128,7 +128,8 @@
 (global-set-key (kbd "C-c w") 'tmux-copy)
 (global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1)))
 (global-set-key "\C-ct" 'testify-run-test)
-(global-set-key "\C-c\C-t" 'testify-run-case)
+(global-set-key "\C-c\C-o" 'testify-run-case)
+(global-set-key "\C-c1" 'evil-mode)
 
 ;; Something will occasionally override this binding.
 (global-set-key "\C-cg" 'rope-goto-definition)
@@ -239,3 +240,4 @@
  '(fci-rule-color "#383838")
  '(foreground-color "#626262")
  '(safe-local-variable-values (quote ((python-indent . tab-width) (whitespace-line-column . 80) (lexical-binding . t)))))
+
