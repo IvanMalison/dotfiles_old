@@ -9,21 +9,17 @@ get_cols () {
     for column_num in $@; do
 	[ -r $column_num ] && continue
 
-	[ $column_num -lt '0' ] && column_num="(NF + 1 $column_num )" #Negative indices like python's array[-1]
-
-	[ -z $column_list ] && column_num="\$$column_num" || column_num=",\$$column_num" # Place commas appropriately.
-
-	column_list="$column_list$column_num"
-    done
-    unset column_num
-
     # Is the first parameter a file?
-    if [ -r $1 ]; then
-	awk "{print $column_list}" $1
-    else
-	awk "{print $column_list}"
+    awk_string="BEGIN { FS = \"$separator\" } ; {print $column_list}"
+
+	if [ -r $1 ]; then
+		awk $awk_string $1
+	else
+		awk "$awk_string"
     fi
+
     unset column_list
+    unset awk_string
 }
 
 note() {
@@ -32,7 +28,6 @@ note() {
     else
         $EDITOR $HOME/notes/"$*" ;
     fi
-}
 
 list_notes() {
     ls -c $HOME/notes/ | grep "$*"
