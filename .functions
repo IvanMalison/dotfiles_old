@@ -3,35 +3,7 @@ function fix_environment_script() {
 }
 
 function get_cols() {
-    # Usage: get_cols [file_name] [column_num]
-    column_list=""
-    for column_num in $@
-    do
-        [ -r $column_num ] && continue
-
-        if echo $column_num | grep '\-F' ; then
-            separator=$(echo $column_num | sed 's/-F//g' )
-            continue
-        fi
-
-        [ $column_num -lt '0' ] && column_num="(NF + 1 $column_num )" #Negative indices like python's array[-1]
-
-        [ -z $column_list ] && column_num="\$$column_num" || column_num=",\$$column_num" # Place commas appropriately.
-
-        column_list="$column_list$column_num"
-    done
-
-    # Is the first parameter a file?
-    awk_string="BEGIN { FS = \"$separator\" } ; {print $column_list}"
-
-    if [ -r $1 ]; then
-	awk $awk_string $1
-    else
-	awk "$awk_string"
-    fi
-
-    unset column_list
-    unset awk_string
+    awk -f "$HOME/.scripts/get_cols.awk" --assign="cols=$*"
 }
 
 function note() {
