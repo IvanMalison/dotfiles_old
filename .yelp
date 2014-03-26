@@ -1,0 +1,10 @@
+alias i="ipython tools/interactive.py"
+alias apperror="tools/scribereader -e prod -f apperror | tools/pretty_error_log"
+alias environ=". ~/.pgconf-$USER/environ.sh"
+alias ym="cd ~/pg/yelp-main"
+alias live="cd /nail/live/yelp"
+alias sb="sandbox -vv --minimal"
+
+function fix_environment_script() {
+    sed -i 's/export YELP_CONFIG:yelp_conn:replication_delay_params.*$//' $YELP_SANDBOX_ROOT/environment.sh
+}
