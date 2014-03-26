@@ -1,9 +1,7 @@
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Customize to your needs...
-for file in ~/.{path,exports,prompt,aliases,functions,extra,yelp}; do
-	[ -r "$file" ] && source "$file"
+for file in ~/.{path,exports,prompt,aliases,functions,extra,remote_clipboard,yelp}; do
+    [ -r "$file" ] && source "$file"
 done
 
 #Yelpy stuff.

@@ -1,0 +1,36 @@
+function remote_clipboard_server() {
+    if [ -z "$1" ]
+    then
+        port='1234'
+    else
+        port="$1"
+    fi
+    while [ 1 ]
+    do
+        netcat -l -p $port -e "pbcopy"
+    done
+}
+
+function remote_clipboard_server_daemon() {
+    daemonize `which reattach-to-user-namespace` -l $SHELL -c "source ~/.zshrc; remote_clipboard_server"
+}
+
+function linux_nc_paste_to_remote_clipboard() {
+    if [ -z "$1" ]
+    then
+        port='1234'
+    else
+        port="$1"
+    fi
+    nc localhost 1234 -q 0
+}
+
+function osx_nc_paste_to_remote_clipboard() {
+    if [ -z "$1" ]
+    then
+        port='1234'
+    else
+        port="$1"
+    fi
+    nc localhost 1234 -D
+}
