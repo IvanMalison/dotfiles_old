@@ -137,3 +137,5 @@ alias prj='cd ~/Dropbox/Projects'
 alias gpoh='git push origin HEAD'
 alias gs='git status'
 alias timestamp='date +%s'
+
+alias remote_os_copy='linux_nc_paste_to_remote_clipboard'
