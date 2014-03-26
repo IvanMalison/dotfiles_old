@@ -105,3 +105,5 @@ alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 alias tmux="tmux -2"
 alias prj='cd ~/Dropbox/Projects'
+
+alias remote_os_copy='linux_nc_paste_to_remote_clipboard'
