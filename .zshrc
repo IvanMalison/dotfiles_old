@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Customize to your needs...
-for file in ~/.{path,exports,prompt,aliases,functions,extra}; do
+for file in ~/.{path,exports,prompt,aliases,functions,extra,remote_clipboard}; do
     [ -r "$file" ] && source "$file"
 done
 
