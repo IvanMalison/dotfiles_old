@@ -2,11 +2,11 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Customize to your needs...
-for file in ~/.{path,exports,prompt,aliases,functions,extra,remote_clipboard}; do
+for file in ~/.{path,exports,aliases,functions,extra,remote_clipboard,yelp,prompt}; do
     [ -r "$file" ] && source "$file"
 done
 
-ZSH_THEME="fino"
+ZSH_THEME="fino-yelp"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"

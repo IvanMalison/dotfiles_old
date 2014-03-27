@@ -8,3 +8,7 @@ alias sb="sandbox -vv --minimal"
 function fix_environment_script() {
     sed -i 's/export YELP_CONFIG:yelp_conn:replication_delay_params.*$//' $YELP_SANDBOX_ROOT/environment.sh
 }
+
+function get_sandbox_identifier() {
+    echo $YELP_SANDBOX_ROOT | gawk 'match($0, /pgconf-.*-(.*)/, matched) {print matched[1]}'
+}
