@@ -61,3 +61,44 @@ function parse_git_branch() {
 function parse_git_dirty() {
     [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
 }
+
+function is_proddb() {
+python - <<END
+import os
+import sys
+import yaml
+
+
+def is_proddb_from_topology_info(topology_info):
+    for cluster_info in topology_info['topology']:
+        if cluster_info['cluster'] == 'primary':
+            return cluster_info['entries'][0]['host'] != '127.0.0.1'
+
+def is_proddb_from_topology_filename(topology_filename):
+    with open(topology_filename) as topology_file:
+        return is_proddb_from_topology_info(yaml.load(topology_file))
+
+def is_proddb():
+    topology_filename =  os.environ.get('TOPOLOGY_FILE')
+    if topology_filename:
+        return is_proddb_from_topology_filename(topology_filename)
+    return False
+
+
+sys.exit(0 if is_proddb() else 1)
+END
+}
+
+function sandbox_prompt_info() {
+    if is_proddb
+    then
+        echo "\[\033[35m\](proddb sandbox)\[\033[00m\]"
+    elif [ "$YELP_IN_SANDBOX" ];
+    then
+        echo "\[\033[35m\](sandbox)\[\033[00m\]"
+    else
+        echo "(no sandbox)"
+    fi
+}
+
+export PS1="[\[\033[1;36m\]\u$@\[\033[00m\]@\h:\[\033[1;32m\]\w\[\033[00m\]]\[\033[1;33m\]\$GIT_PROMPT_BRANCH \[\033[ $(sandbox_prompt_info) \$ "
