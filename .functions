@@ -1,5 +1,14 @@
 function get_cols() {
-    awk -f "$HOME/.scripts/get_cols.awk" --assign="cols=$*"
+    FS=' '
+    while getopts "F:" OPTCHAR; do
+        case $OPTCHAR in
+            F)
+                FS=$OPTARG
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+    awk -f "$HOME/.scripts/get_cols.awk" -v "cols=$*" -v "FS=$FS"
 }
 
 function get_shas_that_touched() {
