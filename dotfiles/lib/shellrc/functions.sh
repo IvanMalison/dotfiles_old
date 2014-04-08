@@ -8,7 +8,7 @@ function get_cols() {
         esac
     done
     shift $((OPTIND-1))
-    awk -f "$HOME/.scripts/get_cols.awk" -v "cols=$*" -v "FS=$FS"
+    awk -f "$HOME/.lib/get_cols.awk" -v "cols=$*" -v "FS=$FS"
 }
 
 function find_all_ssh_agent_sockets() {
