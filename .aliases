@@ -1,5 +1,4 @@
 alias emacs="emacsclient -t"
-alias readlink="greadlink"
 
 # enables the sudoing of aliases.
 alias sudo='sudo '
