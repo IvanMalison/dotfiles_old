@@ -14,7 +14,7 @@ function get_sandbox_identifier() {
 }
 
 function is_proddb() {
-python - <<END
+python 2>/dev/null - <<END
 import os
 import sys
 import yaml
@@ -69,9 +69,9 @@ function bash_sandbox_color() {
 function zsh_sandbox_color() {
     if [ $YELP_IN_SANDBOX ]
     then
-	sandbox_color='%{$FG[149]%}'
+	sandbox_color="%{$FG[149]%}"
     else
-	sandbox_color='%{$FG[001]%}'
+	sandbox_color="%{$FG[001]%}"
     fi
     echo $sandbox_color
 }
@@ -83,5 +83,5 @@ function colored_sandbox_string() {
     else
 	sandbox_color=$(bash_sandbox_color)
     fi
-    echo "$sandbox_color"$(sandbox_prompt_info)
+    echo $sandbox_color$(sandbox_prompt_info)
 }

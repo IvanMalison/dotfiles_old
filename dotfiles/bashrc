@@ -1,1 +1,2 @@
 source ~/.lib/shellrc.sh
+source ~/.lib/bash.sh

@@ -1,3 +1,17 @@
+function parse_git_branch() {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+    echo ${ref#refs/heads/}
+}
+
+function current_shell() {
+    ps -p $$ | tail -1 | awk '{print $NF}' | xargs which | xargs readlink -f
+}
+
+function is_zsh() {
+    test -n "$(current_shell | grep -o zsh)"
+}
+
 function get_cols() {
     FS=' '
     while getopts "F:" OPTCHAR; do
@@ -47,18 +61,6 @@ function digga() {
     dig +nocmd "$1" any +multiline +noall +answer
 }
 
-function parse_git_branch() {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
-}
-
-function parse_git_dirty() {
-    [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
-}
-
-function current_shell() {
-    ps -p $$ | tail -1 | awk '{print $NF}' | xargs which | xargs readlink -f
-}
-
-function is_zsh() {
-    test -n "$(current_shell | grep -o zsh)"
+function shell_stats() {
+    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n20
 }
