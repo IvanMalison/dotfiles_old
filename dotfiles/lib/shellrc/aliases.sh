@@ -1,3 +1,5 @@
+alias script_abspath='$(dirname "${BASH_SOURCE}" | xargs "${readlink_command}" -f)'
+
 alias emacs="emacsclient -t"
 
 # enables the sudoing of aliases.
@@ -42,7 +44,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
     alias "$method"="lwp-request -m '$method'"
 done
 
-# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
 

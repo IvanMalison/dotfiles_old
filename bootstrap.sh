@@ -7,28 +7,17 @@ case `uname` in
         readlink_command='readlink'
 esac
 
-CURRENT_DIRECTORY="$(dirname "${BASH_SOURCE}" | xargs "${readlink_command}" -f)"
+CURRENT_DIRECTORY="$(dirname "${BASH_SOURCE}" | xargs "${readlink_command}" -f)/dotfiles"
 cd $CURRENT_DIRECTORY
 
 echo "Linking From $CURRENT_DIRECTORY"
 
 function symlink_dotfiles() {
     [[ -a ~/.dotfiles-backups ]] || mkdir ~/.dotfiles-backups
-    exclude_list="setup.sh Monaco-Powerline.otf web_start.sh oh-my-zsh tmux-powerline .git .gitmodules .DS_store bootstrap.sh README.md more_python.txt . .. requirements.txt"
-
-    for i in .*; do
-        if ! [ -z ${i/*.swp/} ] && ! [[ $exclude_list =~ $i ]]
-        then
-            [[ -a ~/$i ]] && mv ~/$i ~/.dotfiles-backups/$i
-            ln -si $CURRENT_DIRECTORY/$i ~/$i
-        fi
-    done
-    for i in *; do
-        if ! [ -z ${i/*.swp/} ] && ! [[ $exclude_list =~ $i ]]
-        then
-            [[ -a ~/$i ]] && mv ~/$i ~/.dotfiles-backups/$i
-            ln -si $CURRENT_DIRECTORY/$i ~/$i
-        fi
+    for filename in *; do
+        local link_destination="$HOME/.$filename"
+        local absolute_path="$($readlink_command -f $filename)"
+        ln -si $absolute_path $link_destination
     done
 }
 
@@ -42,4 +31,3 @@ else
     fi
 fi
 unset symlink_dotfiles
-source ~/.bash_profile

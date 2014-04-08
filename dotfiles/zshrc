@@ -1,0 +1,30 @@
+source ~/.lib/shellrc.sh
+
+# Set to this to use case-sensitive completion
+CASE_SENSITIVE="true"
+
+fpath=(~/.completions $fpath)
+ 
+# compsys initialization
+autoload -U compinit
+compinit
+
+# Path to your oh-my-zsh configuration.
+ZSH_THEME="fino-yelp"
+
+ZSH=$HOME/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# Set to this to use case-sensitive completion
+CASE_SENSITIVE="true"
+
+
+unset file
+
+# COMPLETION SETTINGS
+# add custom completion scripts
+fpath=(~/.completions $fpath) 
+ 
+# compsys initialization
+autoload -U compinit
+compinit
