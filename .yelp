@@ -30,11 +30,13 @@ def is_proddb_from_topology_filename(topology_filename):
         return is_proddb_from_topology_info(yaml.load(topology_file))
 
 def is_proddb():
-    topology_filename =  os.environ.get('TOPOLOGY_FILE')
-    if topology_filename:
-        return is_proddb_from_topology_filename(topology_filename)
-    return False
-
+    try:
+        topology_filename =  os.environ.get('TOPOLOGY_FILE')
+        if topology_filename:
+            return is_proddb_from_topology_filename(topology_filename)
+        return False
+    except:
+        pass
 
 sys.exit(0 if is_proddb() else 1)
 END
@@ -45,7 +47,7 @@ function sandbox_prompt_info() {
     if is_proddb
     then
         sandbox_string="proddb "
-    fi    
+    fi
     if [ "$YELP_IN_SANDBOX" ];
     then
         sandbox_string=$sandbox_string"sandbox-$(get_sandbox_identifier)"
@@ -55,16 +57,31 @@ function sandbox_prompt_info() {
     echo $sandbox_string
 }
 
-function bash_colored_sanbox_string() {
-    
+function bash_sandbox_color() {
+    if [ $YELP_IN_SANDBOX ]
+    then
+	sandbox_color='\e[0;33m'
+    else
+	sandbox_color='\e[0;31m'
+    fi
 }
 
-function zsh_colored_sandbox_string() {
+function zsh_sandbox_color() {
     if [ $YELP_IN_SANDBOX ]
     then
 	sandbox_color='%{$FG[149]%}'
     else
 	sandbox_color='%{$FG[001]%}'
     fi
-    echo $sandbox_color$(sandbox_prompt_info)
+    echo $sandbox_color
+}
+
+function colored_sandbox_string() {
+    if [ is_zsh ]
+    then
+	sandbox_color=$(zsh_sandbox_color)
+    else
+	sandbox_color=$(bash_sandbox_color)
+    fi
+    echo "$sandbox_color"$(sandbox_prompt_info)
 }
