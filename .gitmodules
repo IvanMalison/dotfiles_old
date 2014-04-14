@@ -1,3 +1,12 @@
-[submodule "dotfiles/emacs.d"]
-	path = dotfiles/emacs.d
-	url = git@github.com:IvanMalison/.emacs.d.git
+[submodule "lisp/flymake-cursor"]
+	path = lisp/flymake-cursor
+	url = git@github.com:illusori/emacs-flymake-cursor.git
+[submodule "lisp/multi-line-it"]
+	path = lisp/multi-line-it
+	url = git@github.com:IvanMalison/multi-line-it.git
+[submodule "emacs-for-python"]
+	path = emacs-for-python
+	url = git@github.com:IvanMalison/emacs-for-python.git
+[submodule "lisp/emacs-testify"]
+	path = lisp/emacs-testify
+	url = git@github.com:IvanMalison/emacs-testify.git
