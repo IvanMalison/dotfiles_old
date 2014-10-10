@@ -1,6 +1,6 @@
-[submodule "dotfiles/emacs.d"]
-	path = dotfiles/emacs.d
-	url = https://github.com/IvanMalison/.emacs.d.git
-[submodule "dotfiles/vim/bundle/vundle"]
-	path = dotfiles/vim/bundle/vundle
-	url = https://github.com/gmarik/Vundle.vim.git
+[submodule "lisp/multi-line-it"]
+	path = lisp/multi-line-it
+	url = https://github.com/IvanMalison/multi-line-it.git
+[submodule "lisp/emacs-testify"]
+	path = lisp/emacs-testify
+	url = https://github.com/IvanMalison/emacs-testify.git
